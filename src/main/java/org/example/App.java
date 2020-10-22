@@ -14,7 +14,6 @@ import java.util.concurrent.CompletableFuture;
 
 /**
  * Hello world!
- *
  */
 class App {
 
@@ -25,39 +24,28 @@ class App {
     }
 
 
-    private static Map<String, Integer> parseFileAsync(Path path){
+    private static Map<String, Integer> parseFileAsync(Path path) {
         IFileParser parser = new HtmlFileParser();
         System.out.println("wait while downloading....");
         return parser.parse(path);
     }
 
-    private static void storeToRepositoryAsync(String url, Map<String, Integer> dictionary){
-        if(dictionary.isEmpty())
+    private static void storeToRepositoryAsync(String url, Map<String, Integer> dictionary) {
+        if (dictionary.isEmpty())
             return;
         IDictionaryRepository store = new ConsoleDictionaryRepository();
         store.store(url, dictionary);
     }
 
-    private static void downLoadSiteAsync(CompletableFuture<Path> future, String url){
+    private static void downLoadSiteAsync(CompletableFuture<Path> future, String url) {
         IFileDownloader downloader = new HttpFileDownloader();
         future.thenApply(path -> downloader.downloadFile(url))
-                .exceptionally(throwable -> handleDownLoadError(throwable))
                 .thenApplyAsync(path -> parseFileAsync(path))
-                .exceptionally(throwable -> handleParseError(throwable))
                 .thenAcceptAsync(dictionary -> storeToRepositoryAsync(url, dictionary))
-                .thenAccept(res -> System.out.println("Enter new URL or \"q\" to exit"));
-    }
-
-    private static Path handleDownLoadError(Throwable exception){
-        System.out.println("Error downloading file!");
-        return null;
-    }
-
-    private static Map<String, Integer> handleParseError(Throwable exception){
-        System.out.println("Error parsing file!");
-        System.out.println("Enter new URL " +
-                "or \"q\" to exit");
-        return null;
+                .exceptionally(throwable -> {
+                    System.out.println(throwable.toString());
+                    return null;
+                });
     }
 
     public static void main(String[] args) {
@@ -71,6 +59,7 @@ class App {
 
             while (!url.equalsIgnoreCase(quitString)) {
                 parseUrl(url);
+                System.out.println("Enter new URL or \"q\" to exit");
                 url = scan.nextLine();
             }
         } else {

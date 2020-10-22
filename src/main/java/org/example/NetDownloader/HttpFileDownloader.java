@@ -1,8 +1,6 @@
 package org.example.NetDownloader;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,26 +17,18 @@ public class HttpFileDownloader implements IFileDownloader {
      * @param url a URL of desired web-page
      */
     @Override
-    public Path downloadFile(String url){
-        Path currentRelativePath = Paths.get("");
-        String m_path = currentRelativePath.toAbsolutePath().toString();
-        String m_folder = "/downloads/";
-        m_path = m_path.concat(m_folder);
-        Path path = Paths.get(m_path);
+    public Path downloadFile(String url) {
+        Path path = Paths.get(Paths.get("").toAbsolutePath().toString().concat("/downloads/"));
 
-        Path downloadsFolder = null;
-        Path downloadsFile = null;
         try {
-            downloadsFolder = Files.createDirectories(path);
-            URL resource = null;
-            resource = new URL(url);
-            InputStream stream = null;
-            stream = resource.openStream();
-            downloadsFile = Paths.get(downloadsFolder.toString().concat("/").concat(resource.getHost()).concat(".html"));
+            Files.createDirectories(path);
+            URL resource = new URL(url);
+            InputStream stream = resource.openStream();
+            Path downloadsFile = Paths.get(path.toString().concat("/").concat(resource.getHost()).concat(".html"));
             Files.copy(stream, downloadsFile, REPLACE_EXISTING);
             return downloadsFile;
         } catch (Throwable exception) {
-            throw new RuntimeException();
+            throw new RuntimeException(exception.toString());
         }
 
     }
