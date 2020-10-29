@@ -6,10 +6,8 @@ public interface IDictionaryRepository {
 
     /**
      * Вывродит сожержимое словаря в консорль
-     *
-     * @param source     адрес сохранёной страницы
+     *  @param source     адрес сохранёной страницы
      * @param dictionary словарь, содержащий слова и частоту их
-     *                  нахождения на странице
      */
-    void store(String source, Map<String, Integer> dictionary);
+    void store(String source, Map<String, Long> dictionary);
 }

@@ -1,6 +1,5 @@
 package org.example.FileParsers;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
 
@@ -11,6 +10,7 @@ public interface IFileParser {
      * и частоту нахождения
      *
      * @param path путь к странице
+     * @return словарь, сождержащий слова и частоту нахождения
      */
-    Map<String, Integer> parse(Path path);
+    Map<String, Long> parse(Path path);
 }

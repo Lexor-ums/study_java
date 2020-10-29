@@ -32,7 +32,7 @@ class App {
      * @param path путь к файлу
      * @return возвращает словать словать, где ключом является слово, а значение частой ипользоваания
      */
-    private static Map<String, Integer> parseFileAsync(Path path) {
+    private static Map<String, Long> parseFileAsync(Path path) {
         IFileParser parser = new HtmlFileParser();
         System.out.println("wait while downloading....");
         return parser.parse(path);
@@ -43,7 +43,7 @@ class App {
      * @param url путьк файлу
      * @param dictionary словарь
      */
-    private static void storeToRepositoryAsync(String url, Map<String, Integer> dictionary) {
+    private static void storeToRepositoryAsync(String url, Map<String, Long> dictionary) {
         if (dictionary.isEmpty())
             return;
         IDictionaryRepository store = new ConsoleDictionaryRepository();
