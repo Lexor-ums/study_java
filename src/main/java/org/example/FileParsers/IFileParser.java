@@ -7,10 +7,10 @@ import java.util.Map;
 public interface IFileParser {
 
     /**
-     * Parses given HTML-file and creates dictionary containing
-     * readable words and number of their occurrence
+     * Разбирает сохранённую страницу и создаёт словарь, сождержащий слова
+     * и частоту нахождения
      *
-     * @param path a path to the HTML-file
+     * @param path путь к странице
      */
     Map<String, Integer> parse(Path path);
 }

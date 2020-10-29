@@ -6,10 +6,9 @@ import java.nio.file.Path;
 public interface IFileDownloader {
 
     /**
-     * Downloads web page with given URL and saves it to disk
-     * in the downloads folder
+     * Загружает страницу по заданному адресу
      *
-     * @param url a URL of desired web-page
+     * @param url адрес страницы
      */
     Path downloadFile(String url);
 }

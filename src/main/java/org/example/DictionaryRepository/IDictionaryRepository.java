@@ -5,11 +5,11 @@ import java.util.Map;
 public interface IDictionaryRepository {
 
     /**
-     * Outputs data containing in the dictionary to console
+     * Вывродит сожержимое словаря в консорль
      *
-     * @param source     an URL of page the dictionary was generated from
-     * @param dictionary the dictionary containing words and
-     *                   number of occurrences of each word
+     * @param source     адрес сохранёной страницы
+     * @param dictionary словарь, содержащий слова и частоту их
+     *                  нахождения на странице
      */
     void store(String source, Map<String, Integer> dictionary);
 }

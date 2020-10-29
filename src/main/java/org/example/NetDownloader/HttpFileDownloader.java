@@ -11,15 +11,13 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 public class HttpFileDownloader implements IFileDownloader {
 
     /**
-     * Downloads web page with given URL and saves it to disk
-     * in the downloads folder
+     * Загружает страницу по заданному адресу
      *
-     * @param url a URL of desired web-page
+     * @param url адрес страницы
      */
     @Override
     public Path downloadFile(String url) {
         Path path = Paths.get(Paths.get("").toAbsolutePath().toString().concat("/downloads/"));
-
         try {
             Files.createDirectories(path);
             URL resource = new URL(url);

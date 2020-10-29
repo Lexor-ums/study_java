@@ -11,6 +11,12 @@ import java.util.Map;
 
 public class HtmlFileParser implements IFileParser {
 
+    /**
+     * Разбирает сохранённую страницу и создаёт словарь, сождержащий слова
+     * и частоту нахождения
+     *
+     * @param path путь к странице
+     */
     @Override
     public Map<String, Integer> parse(Path path){
         File file = new File(path.toString());
