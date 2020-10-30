@@ -12,9 +12,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 
-/**
- * Hello world!
- */
 class App {
 
     /**
